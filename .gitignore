@@ -1,0 +1,7 @@
+*
+!*.*
+!*/
+*.dSYM
+*.vscode
+*.out
+std_lib_facilities.h
