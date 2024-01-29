@@ -10,20 +10,19 @@ float distanceFallen(float time) {
 float ballHeight(float towerHeight, float time) {
     float ballHeight;
     ballHeight = towerHeight - distanceFallen(time);
-    if (ballHeight < 0) 
-        return 0;
-    else 
-        return ballHeight;
+    return ((ballHeight < 0) ? 0 : ballHeight);
     
 }
 
 int printHeight(float towerHeight, float time) {
     float currentBallHeight;
     currentBallHeight = ballHeight(towerHeight, time);
-    if (currentBallHeight == 0)
+    if (currentBallHeight == 0) {
         std::cout << "at " << time << " seconds, the ball is on the ground.\n";
-    else
+    }
+    else {
         std::cout << "at " << time << " seconds, the ball is at height: " << currentBallHeight << " meters\n";
+    }
 
     return 0;
 }
