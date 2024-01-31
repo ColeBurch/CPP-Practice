@@ -1,6 +1,10 @@
 #include <iostream>
 #include "Random.h"
 
+void ignoreLine() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
 void game() {
     std::cout << "Let\'s play a game. I'm thinking of a number between 1 and 100. You have 7 tries to guess what it is.\n";
 
@@ -10,7 +14,19 @@ void game() {
         std::cout << "Guess #" << i << ": ";
         int guess;
         std::cin >> guess;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (std::cin.fail()) {
+            std::cin.clear();
+            ignoreLine();
+            std::cout << "Invalid Input\n";
+            i--;
+            continue;
+        }
+        ignoreLine();
+        if (guess < 0 || guess > 100) {
+            std::cout << "Invalid Input\n";
+            i--;
+            continue;
+        }
         if (guess < randomNumber) {
             std::cout << "Your guess is too low.\n";
             continue;
@@ -38,8 +54,15 @@ void gameLoop() {
         std::cin.sync();
         char response;
         std::cin >> response;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (std::cin.fail()) {
+            std::cin.clear();
+            ignoreLine();
+            std::cout << "Invalid Input\n";
+            continue;
+        }
+        ignoreLine();
         if (response != 'y' && response != 'n') {
+            std::cout << "Invalid Input\n";
             continue;
         }
         if (response == 'n') {
